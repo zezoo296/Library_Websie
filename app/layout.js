@@ -14,8 +14,8 @@ export default function RootLayout({ children }) {
       <body>
         <div className="video-bg-container">
           <video autoPlay muted loop playsInline id="bg-video">
-            <source src="../Videos/HomeBackground.mp4" type="video/mp4"></source>
-            <source src="../Videos/HomeBackground.mp4" type="video/webm"></source>
+            <source src="/videos/HomeBackground.mp4" type="video/mp4"></source>
+            <source src="/videos/HomeBackground.mp4" type="video/webm"></source>
           </video>
           <div className="overlay"></div>
           <div className="content">
