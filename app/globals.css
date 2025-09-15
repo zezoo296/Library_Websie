@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+:root {
+    --background: #ffffff;
+    --foreground: #171717;
+}
+
+@theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: #0a0a0a;
+        --foreground: #ededed;
+    }
+}
+
+body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: Arial, sans-serif;
+}
+
+.video-bg-container {
+    position: relative; /* like your GIF container */
+    min-height: 100vh; /* full screen */
+    padding: 15px; /* same padding */
+    overflow: hidden; /* hides overflow from video */
+}
+
+#bg-video {
+    position: fixed; /* stay fixed relative to viewport */
+    top: 0;
+    left: 0;
+    width: 100vw; /* full viewport width */
+    height: 100vh; /* full viewport height */
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+    transform: none; /* no need to center anymore */
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 0;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+}
+
+*{
+    transition: all 0.3s;
+}

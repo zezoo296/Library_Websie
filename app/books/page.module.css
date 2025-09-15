@@ -1,0 +1,40 @@
+.books{
+    width: 1245px;
+    margin: 50px auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    justify-items: center;
+}
+
+.no-books-message {
+    font-size: 30px;
+    color: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    text-align: center;
+    z-index: 10;
+}
+
+
+@media (min-width: 692px) {
+    .books{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media (min-width: 992px) {
+    .books{
+        grid-template-columns: repeat(4,1fr);
+    }
+
+}
+
+@media screen and (max-width: 1550px) {
+    .books{
+        width: calc(100% - 100px) !important;
+    }
+}
