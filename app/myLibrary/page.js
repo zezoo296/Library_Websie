@@ -1,10 +1,11 @@
 import React from 'react'
 import MyLibraryPage from './MyLibrary'
 import { Suspense } from 'react'
+import Loader from '../../UI/Loader'
 
 const page = () => {
     return (
-        <Suspense fallback={<h1>Loading your page...</h1>}>
+        <Suspense fallback={<Loader />}>
             <MyLibraryPage />
         </Suspense>
     )

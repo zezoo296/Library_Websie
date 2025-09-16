@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import Providers from "./provider";
 import "./globals.css";
+import VideoBackground from "../components/VideoBackground";
 
 export const metadata = {
   title: "Pheonix Library",
@@ -12,12 +13,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <div className="video-bg-container">
-          <video autoPlay muted loop playsInline id="bg-video">
-            <source src="/videos/HomeBackground.mp4" type="video/mp4"></source>
-            <source src="/videos/HomeBackground.mp4" type="video/webm"></source>
-          </video>
-          <div className="overlay"></div>
+        <div className="bg-container">
+          <VideoBackground />
           <div className="content">
             <Providers>
               <Header />
@@ -25,7 +22,6 @@ export default function RootLayout({ children }) {
             </Providers>
           </div>
         </div>
-
       </body>
     </html >
   );

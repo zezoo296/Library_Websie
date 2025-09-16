@@ -25,33 +25,11 @@ body {
     font-family: Arial, sans-serif;
 }
 
-.video-bg-container {
-    position: relative; /* like your GIF container */
-    min-height: 100vh; /* full screen */
-    padding: 15px; /* same padding */
-    overflow: hidden; /* hides overflow from video */
-}
-
-#bg-video {
-    position: fixed; /* stay fixed relative to viewport */
-    top: 0;
-    left: 0;
-    width: 100vw; /* full viewport width */
-    height: 100vh; /* full viewport height */
-    object-fit: cover;
-    z-index: -1;
-    pointer-events: none;
-    transform: none; /* no need to center anymore */
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 0;
+.bg-container {
+    position: relative;
+    min-height: 100vh;
+    padding: 15px;
+    overflow: hidden;
 }
 
 .content {
@@ -59,6 +37,6 @@ body {
     z-index: 1;
 }
 
-*{
+* {
     transition: all 0.3s;
 }
