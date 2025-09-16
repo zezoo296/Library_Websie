@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
-    const { setIsAuthenticated, setToken } = useContext(AuthContext);
+    const { setIsAuthenticated, setToken, setUser } = useContext(AuthContext);
     const login = useGoogleLogin({
         flow: "implicit",
         scope: "https://www.googleapis.com/auth/books",
@@ -13,9 +13,21 @@ const Login = () => {
         onError: handleError,
     });
 
-    function handleSuccess(credientialResponse) {
+    async function handleSuccess(tokenResponse) {
+        const res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo",{
+            headers: {
+                "Authorization": `Bearer ${tokenResponse.access_token}`
+            }
+        });
+
+        const profile = await res.json();
+        setUser({
+            userName: profile.name,
+            picture: profile.picture
+        });
+        
         setIsAuthenticated(true);
-        setToken(credientialResponse.access_token);
+        setToken(tokenResponse.access_token);
     }
 
     function handleError() {

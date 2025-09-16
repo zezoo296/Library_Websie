@@ -7,13 +7,16 @@ export const AuthContext = createContext({
     token: '',
     setToken: () => { },
     favourites: [],
-    setFavourites: () => { }
+    setFavourites: () => { },
+    user: {},
+    setUser: () => {}
 });
 
 const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [token, setToken] = useState('');
     const [favourites, setFavourites] = useState([]);
+    const [user, setUser] = useState({});
 
     useEffect(() => {
         if (!token) return;
@@ -36,7 +39,9 @@ const AuthProvider = ({ children }) => {
         token,
         setToken,
         favourites,
-        setFavourites
+        setFavourites,
+        user,
+        setUser
     }
 
     return (

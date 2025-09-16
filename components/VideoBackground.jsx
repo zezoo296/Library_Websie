@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import classes from "./VideoBackground.module.css";
+import Overlay from "../UI/Overlay";
 
 export default function VideoBackground() {
     const [videoLoaded, setVideoLoaded] = useState(false);
@@ -35,7 +36,7 @@ export default function VideoBackground() {
             </video>
 
             {/* Overlay */}
-            <div className={classes.overlay}></div>
+            <Overlay />
         </>
     );
 }

@@ -108,11 +108,7 @@
 
 @media (max-width: 968px) {
     .content{
-        flex-direction: column;
-    }
-
-    .content .book-image img{
-        width: 50%;
+        flex-direction: column-reverse;
     }
 
     .price{
