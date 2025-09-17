@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
     const url = new URL(request.url);
     const bookId = url.searchParams.get("bookId");
-    const shelfId = url.searchParams.get('shelId');
+    const shelfId = url.searchParams.get('shelfId');
 
     const token = request.cookies.get('token').value;
     if (!token)

@@ -7,7 +7,7 @@ export const AuthContext = createContext({
     favourites: [],
     setFavourites: () => { },
     user: {},
-    setUser: () => {}
+    setUser: () => { }
 });
 
 const AuthProvider = ({ children }) => {
@@ -16,8 +16,26 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState({});
 
     useEffect(() => {
-        
-        if(!isAuthenticated)
+        async function fetchUser() {
+            try {
+                const res = await fetch("/api/auth", { method: "GET" });
+                if (!res.ok) throw new Error("Not authenticated");
+
+                const profile = await res.json();
+                setUser(profile);
+                setIsAuthenticated(true);
+            } catch {
+                setUser(null);
+                setIsAuthenticated(false);
+            }
+        }
+
+        fetchUser();
+    }, []);
+
+    useEffect(() => {
+
+        if (!isAuthenticated)
             return;
 
         async function fetchFavourites() {
@@ -25,7 +43,7 @@ const AuthProvider = ({ children }) => {
 
             if (res.ok) {
                 const data = await res.json();
-                setFavourites(data.map(book => book.id)); // store only IDs
+                setFavourites(data.map(book => book.id));
             }
         }
 

@@ -20,6 +20,12 @@ export async function POST(req) {
 export async function GET(req) {
     // Getting user profile info
     const token = req.cookies.get('token').value;
+    if (!token) {
+        return NextResponse.json(
+            { error: "Not authenticated" },
+            { status: 401 }
+        );
+    }
 
     const res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
         headers: {
@@ -32,9 +38,8 @@ export async function GET(req) {
     return NextResponse.json(profile);
 }
 
-export async function DELETE(){
-    //logout
-    const res = NextResponse.json({message: "User logged out", status: 200});
+export async function DELETE() {
+    const res = NextResponse.json({ message: "User logged out", status: 200 });
     res.cookies.delete('token');
     return res;
 }
