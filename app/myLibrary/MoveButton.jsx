@@ -5,25 +5,22 @@ import { useState, useRef, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../provider";
 
-async function handleMove({ token, bookId, shelfId, currentShelfId }) {
+async function handleMove({ bookId, shelfId, currentShelfId }) {
     if (shelfId === currentShelfId) return;
     let res = await fetch(
         `/api/library?bookId=${bookId}&shelfId=${currentShelfId}`,
         {
-            headers: { Authorization: `Bearer ${token}` },
             method: "DELETE",
         }
     );
     if (!res.ok) throw new Error("Couldn't remove book from current shelf");
 
     res = await fetch(`/api/library?bookId=${bookId}&shelfId=${shelfId}`, {
-        headers: { Authorization: `Bearer ${token}` },
         method: "POST",
     });
     if (!res.ok) {
         // rollback
         await fetch(`/api/library?bookId=${bookId}&shelfId=${currentShelfId}`, {
-            headers: { Authorization: `Bearer ${token}` },
             method: "POST",
         });
         throw new Error("Couldn't add book to needed shelf");
@@ -31,7 +28,7 @@ async function handleMove({ token, bookId, shelfId, currentShelfId }) {
     return { shelfId, message: "Book moved successfully" };
 }
 
-export default function MoveButton({ token, bookId, currentShelfId }) {
+export default function MoveButton({ bookId, currentShelfId }) {
     const [open, setOpen] = useState(false);
     const menuRef = useRef(null);
 
@@ -78,7 +75,6 @@ export default function MoveButton({ token, bookId, currentShelfId }) {
                             onClick={() => {
                                 setOpen(false);
                                 mutate({
-                                    token,
                                     bookId,
                                     shelfId: shelf,
                                     currentShelfId,

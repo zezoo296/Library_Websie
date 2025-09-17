@@ -1,6 +1,6 @@
 'use client'
 import classes from './page.module.css'
-import Login from './Login';
+import Login from '../components/Login';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 

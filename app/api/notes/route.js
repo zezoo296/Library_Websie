@@ -12,6 +12,8 @@ let notes = [
     }
 ];
 
+//should be connected to a db
+
 export async function GET(requset) {
     const url = new URL(requset.url);
     const bookId = url.searchParams.get('bookId');

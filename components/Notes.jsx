@@ -14,6 +14,10 @@ export default function Notes({ bookId }) {
     }, [bookId]);
 
     const handleAddNote = useCallback(async () => {
+        
+        if(!userNote.current.value)
+            return;
+
         await addNote(bookId, userNote.current.value, user);
         userNote.current.value = "";
         fetchNotes();

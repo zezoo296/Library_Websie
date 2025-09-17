@@ -3,15 +3,12 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
     const url = new URL(request.url);
     const bookId = url.searchParams.get("bookId");
-    const shelfId = url.searchParams.get("shelfId");
-    const authHeader = request.headers.get("authorization");
+    const shelfId = url.searchParams.get('shelId');
 
-    if (!authHeader) {
-        return NextResponse.json({ success: false, message: "No token" }, { status: 401 });
-    }
+    const token = request.cookies.get('token').value;
+    if (!token)
+        return NextResponse.json({ status: 401, message: "No token given" });
 
-    const token = authHeader.split(" ")[1];
-    
     const res = await fetch(
         `https://www.googleapis.com/books/v1/mylibrary/bookshelves/${shelfId}/addVolume?volumeId=${bookId}`,
         {
@@ -35,13 +32,11 @@ export async function DELETE(request) {
     const url = new URL(request.url);
     const bookId = url.searchParams.get("bookId");
     const shelfId = url.searchParams.get("shelfId");
-    const authHeader = request.headers.get("authorization");
 
-    if (!authHeader) {
-        return NextResponse.json({ success: false, message: "No token" }, { status: 401 });
-    }
+    const token = request.cookies.get('token').value;
+    if (!token)
+        return NextResponse.json({ status: 401, message: "No token given" });
 
-    const token = authHeader.split(" ")[1];
     const res = await fetch(
         `https://www.googleapis.com/books/v1/mylibrary/bookshelves/${shelfId}/removeVolume?volumeId=${bookId}`,
         {
@@ -64,13 +59,12 @@ export async function DELETE(request) {
 export async function GET(request) {
     const url = new URL(request.url);
     const shelfId = url.searchParams.get("shelfId");
-    const authHeader = request.headers.get("authorization");
 
-    if (!authHeader) {
-        return NextResponse.json({ error: "No token" }, { status: 401 });
-    }
+    const token = request.cookies.get('token').value;
+    console.log(token);
+    if (!token)
+        return NextResponse.json({ status: 401, message: "No token given" });
 
-    const token = authHeader.split(" ")[1];
     const res = await fetch(
         `https://www.googleapis.com/books/v1/mylibrary/bookshelves/${shelfId}/volumes`,
         {
