@@ -19,7 +19,7 @@ export async function POST(req) {
 
 export async function GET(req) {
     // Getting user profile info
-    const token = req.cookies.get('token').value;
+    const token = req.cookies.get('token')?.value;
     if (!token) {
         return NextResponse.json(
             { error: "Not authenticated" },

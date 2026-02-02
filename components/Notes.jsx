@@ -1,7 +1,10 @@
+'use client'
+
 import { useCallback, useEffect, useState, useRef, useContext } from "react";
 import PrimaryButton from "../UI/PrimaryButton";
 import { getNotes, addNote } from "../lib/api/notes";
 import { AuthContext } from "../context/AuthContext";
+
 
 export default function Notes({ bookId }) {
     const userNote = useRef();

@@ -1,9 +1,8 @@
-import { Suspense } from "react";
-import Loader from "../../../UI/Loader";
-import BookDetailsPage from "./BookDetailsPage";
+import { getBookDetails } from "../../../lib/api/books";
+import BookDetailsView from "./BookDetailsView";
 
-export default function Page(props){
-    return <Suspense fallback={<Loader />}>
-        <BookDetailsPage {...props}/>
-    </Suspense>
+export default async function Page({ params }){
+    const data = await getBookDetails(params.id);
+    
+    return <BookDetailsView data={data} id={params.id}/>
 }
