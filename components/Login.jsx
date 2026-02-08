@@ -26,7 +26,7 @@ const Login = () => {
         //get user info using token
         const res = await fetch('/api/auth');
         const profile = await res.json();
-
+        
         //update context
         setUser({
             userName: profile.name,

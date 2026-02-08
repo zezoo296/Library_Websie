@@ -8,6 +8,7 @@ import BookCard from '../../components/BookCard';
 import PageButton from '../../UI/PageButton';
 import classes from './page.module.css';
 import { DEFAULT_MAX_RESULTS } from '../../lib/apiConfig';
+import Link from 'next/link';
 
 const BooksPage = () => {
     const searchParams = useSearchParams();
